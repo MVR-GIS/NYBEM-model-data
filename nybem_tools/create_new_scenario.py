@@ -4,8 +4,8 @@ Each model scenario has a standard folder structure. Models expect prescribed
 folders to exist to read and write data from.
 
 Args:
-    path_to_alt:    string; Path to the alternative in which the prescribed
-                    folder structure will be created.
+    path_to_alt:    string; Path to the parent folder of the alternative in
+                    which the prescribed folder structure will be created.
 
 Returns:
     A prescribed folder structure is written to the path provided.

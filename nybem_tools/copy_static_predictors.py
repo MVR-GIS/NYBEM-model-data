@@ -5,7 +5,6 @@ Some ecological modeling predictor variables are not varied during scenarios.
 This tool copies the NYBEM ecological model variables that do not change from
 the existing condition scenario into the folder structure of a new scenario.
 
-Args:
 :param: path_to_fwop:    string; Path to the parent folder of the existing
                          condition scenario (aka, future without project, FWOP).
 :param: path_to_alt:     string; Path to the parent folder of the alternative
