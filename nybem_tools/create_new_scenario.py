@@ -1,17 +1,18 @@
 """Create the folder structure for a new model scenario.
 
-Each model scenario has a standard folder structure. Models expect prescribed
-folders to exist to read and write data from.
+Each model scenario has a standard folder structure and models expect
+prescribed folders to exist to read and write data from. This tool creates the
+required folder structure for a new model scenario.
 
-Args:
-    path_to_alt:    string; Path to the parent folder of the alternative in
-                    which the prescribed folder structure will be created.
+:param:  path_to_alt:   string; Path to the parent folder of the alternative
+                        in which the prescribed folder structure will
+                        be created.
 
-Returns:
-    A prescribed folder structure is written to the path provided.
+:return:  A prescribed folder structure is written to the path provided.
 """
 import os
 import arcpy
+
 
 def main():
     model_names = ["est_int", "est_sub", "est_sub_hard",
@@ -25,6 +26,7 @@ def main():
         for model_component in model_components:
             os.makedirs(os.path.join(path_to_alt, model_name, model_component),
                         exist_ok=True)
+
 
 if __name__ == "__main__":
     # Get input parameters
