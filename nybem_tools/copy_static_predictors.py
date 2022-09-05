@@ -49,6 +49,7 @@ def main():
     to_est_sub_soft_clam = os.path.join(path_to_alt, "est_sub_soft_clam", "predictors")
 
     copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "pct_sand*")
+    # trailing dot needed to include multiple files
     copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "est_sub_soft.*")
 
     # est_sub_soft_sav ---------------------------------------------------------
