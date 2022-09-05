@@ -82,23 +82,31 @@ def main():
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
-    arcpy.AddMessage("## Mean Velocity")
+    arcpy.AddMessage("## High Velocity")
     utils.adh2raster(output_folder=est_int_path,
-                     output_name="vel_50",
+                     output_name="vel_90",
                      adh_points=adh_velocity,
-                     variable="vel_50",
+                     variable="vel_90",
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
-    arcpy.AddMessage("## Median Velocity, FWOP")
-    fwop_mar_sub_path = os.path.join(path_to_fwop, "mar_sub", "predictors")
-    arcpy.CopyRaster_management(os.path.join(fwop_mar_sub_path, "vel_50.tif"),
-                                os.path.join(est_int_path, "fwop_vel_50.tif"))
-    arcpy.AddMessage("## Edge Erosion")
-    utils.edge_erosion(output_folder=est_int_path,
-                       output_name="edge_erosion",
-                       vel_alt=os.path.join(est_int_path, "vel_50.tif"),
-                       vel_fwop=os.path.join(est_int_path, "fwop_vel_50.tif"))
+
+    # Only calculate edge erosion for alternatives (FWOP = 0)
+    if path_to_fwop != path_to_alt:
+        arcpy.AddMessage("## High Velocity, FWOP")
+        fwop_est_int_path = os.path.join(path_to_fwop, "est_int", "predictors")
+        arcpy.CopyRaster_management(os.path.join(fwop_est_int_path,
+                                                 "vel_90.tif"),
+                                    os.path.join(est_int_path,
+                                                 "fwop_vel_90.tif"))
+        arcpy.AddMessage("## Edge Erosion")
+        utils.edge_erosion(output_folder=est_int_path,
+                           output_name="edge_erosion",
+                           vel_alt=os.path.join(est_int_path,
+                                                "vel_90.tif"),
+                           vel_fwop=os.path.join(est_int_path,
+                                                 "fwop_vel_90.tif"))
+
     arcpy.AddMessage("## Depth Median")
     utils.adh2raster(output_folder=est_int_path,
                      output_name="wse_median",
