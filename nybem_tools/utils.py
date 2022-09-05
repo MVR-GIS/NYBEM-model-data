@@ -161,7 +161,7 @@ def epi_sed_dep(output_folder, output_name, wse_mhhw, wse_median, wse_max):
 
     Episodic Sediment Deposition is calculated using the following formula:
 
-    ESD = (Depth_MHHW − Depth_median) / (Depth_max − Depth_median)
+    ESD = (Depth_max − Depth_median) / (Depth_MHHW − Depth_median)
 
     :param: output_folder: string; Path to the output folder where the raster
                            will be written.
@@ -189,7 +189,7 @@ def epi_sed_dep(output_folder, output_name, wse_mhhw, wse_median, wse_max):
     arcpy.AddMessage(wse_max)
 
     start = timer()
-    esd = (Raster(wse_mhhw) - Raster(wse_median)) / (Raster(wse_max) -
+    esd = (Raster(wse_max) - Raster(wse_median)) / (Raster(wse_mhhw) -
                                                      Raster(wse_median))
     end = timer()
     arcpy.AddMessage(f"Calculated raster. {timedelta(seconds=end - start)}")
