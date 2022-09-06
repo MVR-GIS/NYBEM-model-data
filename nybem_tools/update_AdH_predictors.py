@@ -151,13 +151,10 @@ def main():
                                           "predictors")
 
     arcpy.AddMessage("## Minimum Salinity")
-    utils.adh2raster(output_folder=est_sub_soft_clam_path,
-                     output_name="sal_min_ann",
-                     adh_points=adh_salinity,
-                     variable="depth_avg_",
-                     sql_select="",
-                     barriers=barriers,
-                     mask=mask)
+    arcpy.CopyRaster_management(os.path.join(est_sub_hard_path,
+                                             "sal_min_ann.tif"),
+                                os.path.join(est_sub_soft_clam_path,
+                                             "sal_min_ann.tif"))
 
     arcpy.AddMessage("# EST_SUB_SOFT_SAV")  # ----------------------------------
     est_sub_soft_sav_path = os.path.join(path_to_alt, "est_sub_soft_sav",

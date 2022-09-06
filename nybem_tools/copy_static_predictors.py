@@ -49,7 +49,7 @@ def main():
     to_est_sub_soft_clam = os.path.join(path_to_alt, "est_sub_soft_clam", "predictors")
 
     copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "pct_sand*")
-    # trailing dot needed to include multiple files
+    # trailing dot needed to include multiple files!
     copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "est_sub_soft.*")
 
     # est_sub_soft_sav ---------------------------------------------------------
@@ -83,14 +83,13 @@ def main():
     copy_tif(from_mar_int, to_mar_int, "dev_100_per*")
     copy_tif(from_mar_int, to_mar_int, "shoreline_armoring*")
     copy_tif(from_mar_int, to_mar_int, "slope_per*")
-    copy_tif(from_mar_int, to_mar_int, "veg_50_per*")
 
     # mar_sub ------------------------------------------------------------------
     arcpy.AddMessage("# MAR_SUB")
     from_mar_sub = os.path.join(path_to_fwop, "mar_sub", "predictors")
     to_mar_sub = os.path.join(path_to_alt, "mar_sub", "predictors")
 
-    copy_tif(from_mar_sub, to_mar_sub, "per_fines*")
+    copy_tif(from_mar_sub, to_mar_sub, "pct_fines*")
     copy_tif(from_mar_sub, to_mar_sub, "vessel_density*")
 
 
