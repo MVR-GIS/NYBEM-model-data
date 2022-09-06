@@ -110,14 +110,16 @@ def adh2raster(output_folder, output_name, adh_points, variable, sql_select,
     arcpy.Delete_management(interp_raster_path)
 
 
-def edge_erosion(output_folder, output_name, vel_alt, vel_fwop):
-    """Calculates an Edge Erosion Raster.
+def rel_velocity(output_folder, output_name, vel_alt, vel_fwop):
+    """Calculates a Relative Velocity Raster.
 
-    Edge Erosion is based on the concept of relative current velocity.
     Relative current velocity can be operationalized as the percent increase
     in velocity from the baseline condition.
 
     PercentIncrease = ((value_new − value_original) / value_original) ∗ 100
+
+    Edge Erosion is based on the concept of relative current velocity, using
+    high velocity as input.
 
     :param: output_folder: string; Path to the output folder where the raster
                            will be written.
@@ -143,7 +145,7 @@ def edge_erosion(output_folder, output_name, vel_alt, vel_fwop):
     arcpy.AddMessage(vel_fwop)
 
     start = timer()
-    edge_eros = ((Raster(vel_alt) - Raster(vel_fwop)) / Raster(vel_fwop)) * 100
+    rel_vel = ((Raster(vel_alt) - Raster(vel_fwop)) / Raster(vel_fwop)) * 100
     end = timer()
     arcpy.AddMessage(f"Calculated raster. {timedelta(seconds=end - start)}")
 
@@ -151,7 +153,7 @@ def edge_erosion(output_folder, output_name, vel_alt, vel_fwop):
     start = timer()
     output_raster_name = str(output_name) + ".tif"
     output_raster_path = os.path.join(output_folder, output_raster_name)
-    arcpy.CopyRaster_management(edge_eros, output_raster_path)
+    arcpy.CopyRaster_management(rel_vel, output_raster_path)
     end = timer()
     arcpy.AddMessage(f"Raster saved. {timedelta(seconds=end - start)}")
 
@@ -159,7 +161,8 @@ def edge_erosion(output_folder, output_name, vel_alt, vel_fwop):
 def epi_sed_dep(output_folder, output_name, wse_mhhw, wse_median, wse_max):
     """Calculate Episodic Sediment Deposition.
 
-    Episodic Sediment Deposition is calculated using the following formula:
+    Episodic Sediment Deposition (also referred to as Relative Depth) is
+    calculated using the following formula:
 
     ESD = (Depth_max − Depth_median) / (Depth_MHHW − Depth_median)
 
@@ -291,6 +294,7 @@ def per_light_available(output_folder, output_name, depth_m):
 def expo_dur(output_folder, output_name, wse_100, wse_0, wse_mhhw,
                       wse_mllw):
     """Calculate Exposure Duration.
+
     Calculate the exposure duration using the following equation:
 
     t_rel = (H_max − H_min) / (MHHW − MLLW)

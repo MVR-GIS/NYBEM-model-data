@@ -90,23 +90,19 @@ def main():
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
-
-    # Only calculate edge erosion for alternatives (FWOP = 0)
-    if path_to_fwop != path_to_alt:
-        arcpy.AddMessage("## High Velocity, FWOP")
-        fwop_est_int_path = os.path.join(path_to_fwop, "est_int", "predictors")
-        arcpy.CopyRaster_management(os.path.join(fwop_est_int_path,
-                                                 "vel_90.tif"),
-                                    os.path.join(est_int_path,
-                                                 "fwop_vel_90.tif"))
-        arcpy.AddMessage("## Edge Erosion")
-        utils.edge_erosion(output_folder=est_int_path,
-                           output_name="edge_erosion",
-                           vel_alt=os.path.join(est_int_path,
-                                                "vel_90.tif"),
-                           vel_fwop=os.path.join(est_int_path,
-                                                 "fwop_vel_90.tif"))
-
+    arcpy.AddMessage("## High Velocity, FWOP")
+    fwop_est_int_path = os.path.join(path_to_fwop, "est_int", "predictors")
+    arcpy.CopyRaster_management(os.path.join(fwop_est_int_path,
+                                             "vel_90.tif"),
+                                os.path.join(est_int_path,
+                                             "fwop_vel_90.tif"))
+    arcpy.AddMessage("## Edge Erosion")
+    utils.rel_velocity(output_folder=est_int_path,
+                       output_name="edge_erosion",
+                       vel_alt=os.path.join(est_int_path,
+                                            "vel_90.tif"),
+                       vel_fwop=os.path.join(est_int_path,
+                                             "fwop_vel_90.tif"))
     arcpy.AddMessage("## Depth Median")
     utils.adh2raster(output_folder=est_int_path,
                      output_name="wse_median",
@@ -123,7 +119,7 @@ def main():
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
-    arcpy.AddMessage("## Edge Erosion")
+    arcpy.AddMessage("## Episodic Sediment Deposition (aka Relative Depth)")
     utils.epi_sed_dep(output_folder=est_int_path,
                       output_name="esd",
                       wse_mhhw=os.path.join(path_to_alt, "mhhw.tif"),
@@ -185,9 +181,12 @@ def main():
     arcpy.CopyRaster_management(os.path.join(path_to_alt, "sal_10.tif"),
                                 os.path.join(fresh_tid_path, "sal_10.tif"))
     arcpy.AddMessage("## Episodic Sediment Deposition")
-    arcpy.CopyRaster_management(os.path.join(est_int_path, "esd.tif"),
-                                os.path.join(fresh_tid_path, "esd.tif"))
-    
+    utils.epi_sed_dep(output_folder=fresh_tid_path,
+                      output_name="esd",
+                      wse_mhhw=os.path.join(path_to_alt, "mhhw.tif"),
+                      wse_median=os.path.join(est_int_path, "wse_median.tif"),
+                      wse_max=os.path.join(est_int_path, "wse_100.tif"))
+
     arcpy.AddMessage("# MAR_DEEP")  # ------------------------------------------
     mar_deep_path = os.path.join(path_to_alt, "mar_deep", "predictors")
 
@@ -204,6 +203,19 @@ def main():
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
+    arcpy.AddMessage("## Low Velocity, FWOP")
+    fwop_mar_deep_path = os.path.join(path_to_fwop, "mar_deep", "predictors")
+    arcpy.CopyRaster_management(os.path.join(fwop_mar_deep_path,
+                                             "vel_10.tif"),
+                                os.path.join(mar_deep_path,
+                                             "fwop_vel_10.tif"))
+    arcpy.AddMessage("## Low Velocity Change")
+    utils.rel_velocity(output_folder=est_int_path,
+                       output_name="vel_change",
+                       vel_alt=os.path.join(mar_deep_path,
+                                            "vel_10.tif"),
+                       vel_fwop=os.path.join(mar_deep_path,
+                                             "fwop_vel_10.tif"))
     arcpy.AddMessage("## Percent Light Available")
     arcpy.CopyRaster_management(os.path.join(est_sub_soft_sav_path,
                                              "pla.tif"),
@@ -221,7 +233,7 @@ def main():
                      sql_select="",
                      barriers=barriers,
                      mask=mask)
-    arcpy.AddMessage("## Exposure Duration")
+    arcpy.AddMessage("## Exposure Duration (aka t_rel)")
     utils.expo_dur(output_folder=mar_int_path,
                    output_name="exp_dur",
                    wse_100=os.path.join(est_int_path, "wse_100.tif"),
