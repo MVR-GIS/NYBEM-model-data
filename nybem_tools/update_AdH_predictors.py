@@ -33,6 +33,7 @@ importlib.reload(arcpy)
 importlib.reload(utils)
 
 arcpy.env.compression = "LZW"
+arcpy.env.overwriteOutput = True
 
 
 def main():
@@ -207,7 +208,7 @@ def main():
                                 os.path.join(mar_deep_path,
                                              "fwop_vel_10.tif"))
     arcpy.AddMessage("## Low Velocity Change")
-    utils.rel_velocity(output_folder=est_int_path,
+    utils.rel_velocity(output_folder=mar_deep_path,
                        output_name="vel_change",
                        vel_alt=os.path.join(mar_deep_path,
                                             "vel_10.tif"),
