@@ -22,7 +22,6 @@ def main():
     # alt root -----------------------------------------------------------------
     arcpy.AddMessage("# ALT")
     copy_tif(path_to_fwop, path_to_alt, "bed_elevation*")
-    copy_tif(path_to_fwop, path_to_alt, "habitat_zone*")
     copy_tif(path_to_fwop, path_to_alt, "mask*")
 
     # est_int ------------------------------------------------------------------
