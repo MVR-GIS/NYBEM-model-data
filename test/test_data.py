@@ -7,5 +7,16 @@
 def data_folder():
     import os
 
-    test_abs_path = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(test_abs_path, "data")
+
+    test_folder_abs_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(test_folder_abs_path, "data")
+
+
+"""ArcGIS Checkout Extension License
+"""
+def license_arcpy():
+    import arcpy
+
+
+    arcpy.CheckOutExtension("3D")
+    arcpy.CheckOutExtension("Spatial")
