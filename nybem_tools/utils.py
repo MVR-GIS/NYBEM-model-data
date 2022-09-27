@@ -193,7 +193,7 @@ def epi_sed_dep(output_folder, output_name, wse_mhhw, wse_median, wse_max):
 
     start = timer()
     esd = (Raster(wse_max) - Raster(wse_median)) / (Raster(wse_mhhw) -
-                                                     Raster(wse_median))
+                                                    Raster(wse_median))
     end = timer()
     arcpy.AddMessage(f"Calculated raster. {timedelta(seconds=end - start)}")
 
@@ -292,7 +292,7 @@ def per_light_available(output_folder, output_name, depth_m):
 
 
 def expo_dur(output_folder, output_name, wse_100, wse_0, wse_mhhw,
-                      wse_mllw):
+             wse_mllw):
     """Calculate Exposure Duration.
 
     Calculate the exposure duration using the following equation:
