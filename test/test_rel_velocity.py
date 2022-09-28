@@ -4,6 +4,7 @@ import arcpy
 import test_data
 import nybem_tools.utils
 
+
 # Arrange
 test_data.license_arcpy()
 
