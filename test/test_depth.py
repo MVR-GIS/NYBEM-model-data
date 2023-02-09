@@ -30,7 +30,7 @@ def output_raster_1(output_folder, wse_mtl, bed_elevation):
     output_name = "depth"
 
     nybem_tools.utils.depth(output_folder, output_name,
-                                  wse_mtl, bed_elevation)
+                            wse_mtl, bed_elevation)
     return os.path.join(output_folder, "depth.tif")
 
 

@@ -138,7 +138,6 @@ def output_raster_8():
     return os.path.join(output_folder, "wse_0.tif")
 
 
-#
 # Assert
 def test_adh_raster_1_exists(output_raster_1):
     assert os.path.exists(output_raster_1)

@@ -40,7 +40,7 @@ def main():
 
     copy_tif(from_est_sub_hard, to_est_sub_hard, "cultch*")
     copy_tif(from_est_sub_hard, to_est_sub_hard, "pct_gravel*")
-    copy_tif(from_est_sub_hard, to_est_sub_hard, "est_sub_hard*")
+    # copy_tif(from_est_sub_hard, to_est_sub_hard, "est_sub_hard*")
 
     # est_sub_soft_clam --------------------------------------------------------
     arcpy.AddMessage("# EST_SUB_SOFT_CLAM")
@@ -49,14 +49,14 @@ def main():
 
     copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "pct_sand*")
     # trailing dot needed to include multiple files!
-    copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "est_sub_soft.*")
+    # copy_tif(from_est_sub_soft_clam, to_est_sub_soft_clam, "est_sub_soft.*")
 
     # est_sub_soft_sav ---------------------------------------------------------
     arcpy.AddMessage("# EST_SUB_SOFT_SAV")
     from_est_sub_soft_sav = os.path.join(path_to_fwop, "est_sub_soft_sav", "predictors")
     to_est_sub_soft_sav = os.path.join(path_to_alt, "est_sub_soft_sav", "predictors")
 
-    copy_tif(from_est_sub_soft_sav, to_est_sub_soft_sav, "est_sub_soft*")
+    # copy_tif(from_est_sub_soft_sav, to_est_sub_soft_sav, "est_sub_soft*")
     copy_tif(from_est_sub_soft_sav, to_est_sub_soft_sav, "pct_fines*")
     copy_tif(from_est_sub_soft_sav, to_est_sub_soft_sav, "vessel_density*")
 

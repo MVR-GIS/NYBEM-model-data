@@ -64,7 +64,7 @@ def adh2raster(output_folder, output_name, adh_points, variable, sql_select,
     arcpy.env.overwriteOutput = True
 
     # arcpy.AddMessage(output_folder)
-    arcpy.AddMessage(os.path.basename(adh_points))
+    arcpy.AddMessage(adh_points)
     arcpy.AddMessage(variable)
     # arcpy.AddMessage(sql_select)
     # arcpy.AddMessage(barriers)
