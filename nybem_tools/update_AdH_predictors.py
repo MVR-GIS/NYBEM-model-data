@@ -43,8 +43,8 @@ def main():
     utils.adh2raster(output_folder=path_to_alt,
                      output_name="sal_10",
                      adh_points=adh_salinity,
-                     variable="depth_avg1",
-                     sql_select="",
+                     variable="sal_10",
+                     sql_select="sal_10 > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## MHHW")
@@ -52,7 +52,7 @@ def main():
                      output_name="mhhw",
                      adh_points=adh_wse,
                      variable="MHHW",
-                     sql_select="",
+                     sql_select="MHHW > -3 AND MHHW < 3",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## MLLW")
@@ -60,7 +60,7 @@ def main():
                      output_name="mllw",
                      adh_points=adh_wse,
                      variable="MLLW",
-                     sql_select="",
+                     sql_select="MLLW > -3 AND MLLW < 3",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## MTL")
@@ -68,7 +68,7 @@ def main():
                      output_name="mtl",
                      adh_points=adh_wse,
                      variable="Mean_WSE",
-                     sql_select="",
+                     sql_select="Mean_WSE > -3 AND Mean_WSE < 3",
                      barriers=barriers,
                      mask=mask)
 
@@ -80,7 +80,7 @@ def main():
                      output_name="sal_mean_ann",
                      adh_points=adh_salinity,
                      variable="Mean_Depth",
-                     sql_select="",
+                     sql_select="Mean_Depth > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## High Velocity")
@@ -88,7 +88,7 @@ def main():
                      output_name="vel_90",
                      adh_points=adh_velocity,
                      variable="vel_90",
-                     sql_select="",
+                     sql_select="vel_90 > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## High Velocity, FWOP")
@@ -109,7 +109,7 @@ def main():
                      output_name="wse_median",
                      adh_points=adh_wse,
                      variable="wse_50",
-                     sql_select="",
+                     sql_select="wse_50 > -3 AND wse_50 < 3",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Depth Maximum")
@@ -117,7 +117,7 @@ def main():
                      output_name="wse_100",
                      adh_points=adh_wse,
                      variable="wse_100",
-                     sql_select="",
+                     sql_select="wse_100 > -3 AND wse_100 < 3",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Episodic Sediment Deposition (aka Relative Depth)")
@@ -134,8 +134,8 @@ def main():
     utils.adh2raster(output_folder=est_sub_hard_path,
                      output_name="sal_min_ann",
                      adh_points=adh_salinity,
-                     variable="depth_avg_",
-                     sql_select="",
+                     variable="sal_0",
+                     sql_select="sal_0 > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Mean Salinity")
@@ -143,7 +143,7 @@ def main():
                      output_name="sal_mean_ann",
                      adh_points=adh_salinity,
                      variable="Mean_Depth",
-                     sql_select="",
+                     sql_select="Mean_Depth > -1",
                      barriers=barriers,
                      mask=mask)
 
@@ -198,7 +198,7 @@ def main():
                      output_name="vel_10",
                      adh_points=adh_velocity,
                      variable="vel_10",
-                     sql_select="",
+                     sql_select="vel_10 > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Low Velocity, FWOP")
@@ -228,7 +228,7 @@ def main():
                      output_name="wse_0",
                      adh_points=adh_wse,
                      variable="wse_0",
-                     sql_select="",
+                     sql_select="wse_0 > -3 AND wse_0 < 3",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Exposure Duration (aka t_rel)")
@@ -247,7 +247,7 @@ def main():
                      output_name="vel_50",
                      adh_points=adh_velocity,
                      variable="vel_50",
-                     sql_select="",
+                     sql_select="vel_50 > -1",
                      barriers=barriers,
                      mask=mask)
     arcpy.AddMessage("## Percent Light Available")
